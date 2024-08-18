@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Diet Recommendations</h1>
+        <p>Your BMI: <span style="color: white">{{ bmi }}</span> ({{ category }})</p>
+        <p>Calories needed to maintain weight: {{ maintain_calories }} kcal/day</p>
+        <p>Weight Goal: {{ weight_loss_option }}</p>
+
+        <h2>Meal Recommendations</h2>
+        {% for meal in recommendations %}
+            <div class="meal">
+                <h3>{{ meal[0]['Meal'] }}</h3>
+                <ul>
+                    {% for recipe in meal %}
+                        <li>
+                            <img src="{{ recipe['image_link'] }}" alt="Image">
+                            {{ recipe['Name'] }} - {{ recipe['Calories'] }} kcal
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
